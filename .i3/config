@@ -19,13 +19,13 @@ font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec xterm
 
 # kill focused window
 bindsym $mod+Shift+Q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run
+bindsym $mod+d exec dmenu_run -l 20
 
 # change focus
 bindsym $mod+j focus left
@@ -135,14 +135,17 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 #Custom programs I want to run often
-bindsym $mod+i exec --no-startup-id iceweasel
+bindsym $mod+i exec iceweasel
 bindsym $mod+g exec --no-startup-id google-chrome
 bindsym $mod+c exec --no-startup-id chromium
+bindsym $mod+minus exec --no-startup-id chromium juttersdok.nl/gnu
 bindsym $mod+m exec --no-startup-id pcmanfm
+bindsym F1 exec chromium i3wm.org
 
 bindcode 122 exec --no-startup-id amixer set Master 5%- unmute
 bindcode 123 exec --no-startup-id amixer set Master 5%+ unmute
 bindcode 121 exec --no-startup-id amixer toggle mute
+bindcode 221 exec --no-startup-id gimp
 bindcode 150 workspace 1
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
@@ -150,3 +153,5 @@ bar {
         status_command i3status
         font lucidasanstypewriter-12
 }
+
+exec --no-startup-id i3-msg 'workspace 2; exec chromium; workspace 1; exec xterm -e vimtutor'
