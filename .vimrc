@@ -1,3 +1,4 @@
+set shell=/bin/sh
 set nocompatible               " be iMproved
 filetype off                   " required!
 
@@ -13,7 +14,6 @@ Bundle 'scrooloose/nerdcommenter'
 Bundle 'scrooloose/nerdtree'
 Bundle 'tpope/vim-surround'
 Bundle 'lukaszb/vim-web-indent'
-Bundle 'kchmck/vim-coffee-script'
 Bundle 'godlygeek/tabular'
 Bundle 'walm/jshint.vim'
 Bundle 'jelera/vim-javascript-syntax'
@@ -36,14 +36,13 @@ Bundle 'vcscommand.vim'
 Bundle 'sjl/threesome.vim'
 Bundle 'gregsexton/gitv'
 Bundle 'tpope/vim-fugitive'
-Bundle 'Conque-Shell'
 "needs +python build option
 " Support for D
-Bundle 'JesseKPhillips/d.vim'
+"Bundle 'JesseKPhillips/d.vim'
 
 "Python support
-Bundle 'davidhalter/jedi-vim'
-Bundle 'kevinw/pyflakes-vim'
+"Bundle 'davidhalter/jedi-vim'
+"Bundle 'kevinw/pyflakes-vim'
 Bundle 'javacomplete'
 
 Bundle 'buffet.vim'
@@ -52,8 +51,9 @@ Bundle 'AutoComplPop'
 
 "Golang
 "
-Bundle 'jnwhiteh/vim-golang'
+"Bundle 'jnwhiteh/vim-golang'
 Bundle 'Blackrush/vim-gocode'
+set omnifunc=syntaxcomplete#Complete
 
 " Color schemes
 Bundle 'molokai'
@@ -67,12 +67,9 @@ filetype plugin indent on     " required!
 filetype plugin on
 filetype indent on
 
-
-set tags=$HOME/projs/nog/tags
-
 " Automatic reloading of .vimrc
 autocmd! bufwritepost .vimrc source %
-autocmd! bufwritepost *.js :JSHint
+"autocmd! bufwritepost *.js :JSHint
 
 map <F1> <ESC>
 map <F5> :tabprevious<CR>
@@ -86,7 +83,6 @@ imap <c-s> :w
 " Better copy & paste
 " When you want to paste large blocks of code into vim, press F2 before you
 " paste. At the bottom you should see ``-- INSERT (paste) --``.
-
 set pastetoggle=<F2>
 set clipboard=unnamed
 
@@ -108,7 +104,6 @@ map <c-l> <c-w>l
 map <c-h> <c-w>h
 
 
-" easier moving between tabs
 map <C-\> :NERDTreeToggle<CR>
 
 
@@ -165,6 +160,7 @@ set wildignore+=*/components/*
 set undodir=~/.vim/undodir
 set undofile
 
+
 :let g:haddock_browser="x-www-browser"
 colorscheme delek
 autocmd Filetype java setlocal omnifunc=javacomplete#Complete
@@ -187,3 +183,18 @@ endfunction
 
 map <C-n> :tabnew<CR>
 map \= F=i:<ESC>
+
+let g:syntastic_mode_map = { 'mode': 'active',
+                           \ 'active_filetypes': ['javascript'],
+                           \ 'passive_filetypes': ['html'] }
+
+" To enable this plugin, edit the .vimrc like this:
+let g:syntastic_javascript = "closurecompiler"
+" and set the path to the Google Closure Compiler:
+let g:syntastic_javascript_closure_compiler_path ="$HOME/closure/mfc/node_modules/closure-pro-build/3p/closure-compiler-20130823/compiler.jar"
+
+let g:syntastic_enable_signs=1
+let g:syntastic_auto_loc_list=1
+nnoremap ; :
+set tags=$HOME/projs/camli/src/camlistore.org/tags
+inoremap <C-i> <C-o>:Import 
